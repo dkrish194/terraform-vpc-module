@@ -11,3 +11,7 @@ output "private_subnets_cidr_az" {
 output "databse_subnets_cidr_az" {
   value = local.database_subnets_cidr_az
 }
+output "vpc_id" {
+  description = "${var.project} ${var.environment} vpc id"
+  value = aws_vpc.main.id
+}
