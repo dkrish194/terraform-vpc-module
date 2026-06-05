@@ -27,3 +27,9 @@ variable "database_subnets_cidr" {
   description = "database subnets cidr range"
   type        = list(string)
 }
+
+variable "is_NAT_required" {
+  description = "is NAT Required or not , user can provide"
+  type = bool
+  
+}
