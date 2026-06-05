@@ -98,9 +98,11 @@ resource "aws_route_table_association" "private" {
 
 // create Rules in RT, destination and gateway (via)
 resource "aws_route" "private" {
+  count = var.is_NAT_required ? 1 : 0
   route_table_id         = aws_route_table.private.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_nat_gateway.nat_gw.id
+  # gateway_id             = aws_nat_gateway.nat_gw.id
+  gateway_id             = aws_nat_gateway.nat_gw[count.index].id
 
 }
 
@@ -134,8 +136,10 @@ resource "aws_route_table_association" "database" {
 
 // create Rules in RT, destination and gateway (via)
 resource "aws_route" "database" {
+  count = var.is_NAT_required ? 1 : 0
   route_table_id         = aws_route_table.database.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_nat_gateway.nat_gw.id
+  # gateway_id             = aws_nat_gateway.nat_gw.id
+  gateway_id             = aws_nat_gateway.nat_gw[count.index].id
   
 }
