@@ -21,6 +21,7 @@ resource "aws_eip" "eip" {
   })
 }
 resource "aws_nat_gateway" "nat_gw" {
+  count = var.is_NAT_required ? 1 : 0
   allocation_id = aws_eip.eip.id // Elastic Ip which we created
   subnet_id     = aws_subnet.public["us-east-1a"].id
   tags          = merge(local.common_tags,{
