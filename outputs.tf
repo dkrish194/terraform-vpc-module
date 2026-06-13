@@ -37,3 +37,8 @@ output "database_subnet_ids" {
 output "database_subnet_group_name" {
     value = aws_db_subnet_group.roboshop.name
 }
+
+output "is_NAT_required" {
+  description = "is NAT gw enabled or not"
+  value = var.is_NAT_required
+}
