@@ -19,3 +19,19 @@ output "public_subnet_ids" {
   description = "public subnets ids"
   value = local.public_subnet_ids
 }
+# output "private_subnet_ids" {
+#   description = "private subnets ids"
+#   value = local.private_subnet_ids
+# }
+
+output "private_subnet_ids" {
+    value = aws_subnet.private[*].id
+}
+
+output "database_subnet_ids" {
+    value = aws_subnet.database[*].id
+}
+
+output "database_subnet_group_name" {
+    value = aws_db_subnet_group.roboshop.name
+}
