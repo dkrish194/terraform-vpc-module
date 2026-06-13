@@ -144,8 +144,10 @@ resource "aws_route" "database" {
   
 }
 resource "aws_db_subnet_group" "roboshop" {
+  # for_each = aws_subnet.database
   name       = "${var.project}-${var.environment}"
-  subnet_ids = [aws_subnet.database[0].id,aws_subnet.database[1].id]
+  # subnet_ids = [aws_subnet.database[0].id,aws_subnet.database[1].id]
+  subnet_ids = [ for item in aws_subnet.database: item.id]
 
   tags = merge(
         local.common_tags,

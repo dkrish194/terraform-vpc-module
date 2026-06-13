@@ -25,11 +25,13 @@ output "public_subnet_ids" {
 # }
 
 output "private_subnet_ids" {
-    value = aws_subnet.private[*].id
+    # value = aws_subnet.private[*].id
+    value = [ for item in aws_subnet.private: item.id]
 }
 
 output "database_subnet_ids" {
-    value = aws_subnet.database[*].id
+    # value = aws_subnet.database[*].id
+    value = [ for item in aws_aws_subnet.database: item.id ]
 }
 
 output "database_subnet_group_name" {
