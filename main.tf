@@ -143,3 +143,14 @@ resource "aws_route" "database" {
   gateway_id             = aws_nat_gateway.nat_gw[count.index].id
   
 }
+resource "aws_db_subnet_group" "roboshop" {
+  name       = "${var.project}-${var.environment}"
+  subnet_ids = [aws_subnet.database[0].id,aws_subnet.database[1].id]
+
+  tags = merge(
+        local.common_tags,
+        {
+            Name = "${var.project}-${var.environment}"
+        }
+  )
+}
